@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTU MCQ Platform — Technical Documentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a1a2e;
+            background: #fff;
+            line-height: 1.7;
+            font-size: 11pt
+        }
+
+        @page {
+            size: A4;
+            margin: 20mm 18mm
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                font-size: 10pt
+            }
+
+            .no-print {
+                display: none !important
+            }
+
+            .page-break {
+                page-break-before: always
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px
+        }
+
+        /* Cover */
+        .cover {
+            text-align: center;
+            padding: 80px 20px 60px;
+            page-break-after: always
+        }
+
+        .cover h1 {
+            font-size: 32pt;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px
+        }
+
+        .cover .subtitle {
+            font-size: 14pt;
+            color: #64748b;
+            font-weight: 400;
+            margin-bottom: 40px
+        }
+
+        .cover .meta {
+            font-size: 10pt;
+            color: #94a3b8;
+            margin-top: 30px;
+            line-height: 2
+        }
+
+        .cover .badge {
+            display: inline-block;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 6px 16px;
+            font-size: 9pt;
+            color: #475569;
+            margin: 4px
+        }
+
+        /* Headings */
+        h2 {
+            font-size: 16pt;
+            color: #1e1b4b;
+            border-bottom: 3px solid #4f46e5;
+            padding-bottom: 6px;
+            margin: 30px 0 16px;
+            page-break-after: avoid
+        }
+
+        h3 {
+            font-size: 12pt;
+            color: #312e81;
+            margin: 20px 0 10px;
+            page-break-after: avoid
+        }
+
+        h4 {
+            font-size: 10.5pt;
+            color: #4338ca;
+            margin: 14px 0 6px
+        }
+
+        p {
+            margin-bottom: 10px
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 20px;
+            font-size: 9.5pt
+        }
+
+        th {
+            background: #4f46e5;
+            color: #fff;
+            text-align: left;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        td {
+            padding: 7px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc
+        }
+
+        /* Lists */
+        ul,
+        ol {
+            margin: 8px 0 14px 20px
+        }
+
+        li {
+            margin-bottom: 4px
+        }
+
+        /* Code */
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 9pt;
+            color: #4338ca;
+            font-family: 'Courier New', monospace
+        }
+
+        .code-block {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 9pt;
+            margin: 10px 0 16px;
+            overflow-x: auto;
+            white-space: pre-wrap
+        }
+
+        /* Badges */
+        .tech-badge {
+            display: inline-block;
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            color: #4338ca;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 8.5pt;
+            font-weight: 600;
+            margin: 2px
+        }
+
+        .tech-badge.green {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #047857
+        }
+
+        .tech-badge.orange {
+            background: #fff7ed;
+            border-color: #fed7aa;
+            color: #c2410c
+        }
+
+        .tech-badge.pink {
+            background: #fdf2f8;
+            border-color: #fbcfe8;
+            color: #be185d
+        }
+
+        /* Diagram box */
+        .arch-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 16px 0;
+            font-size: 9.5pt
+        }
+
+        .arch-box .layer {
+            background: #fff;
+            border: 1px solid #c7d2fe;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 6px auto;
+            max-width: 500px
+        }
+
+        .arch-box .arrow {
+            color: #4f46e5;
+            font-size: 14pt;
+            margin: 4px 0
+        }
+
+        /* Print button */
+        .print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 11pt;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(79, 70, 229, .4);
+            z-index: 999
+        }
+
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(79, 70, 229, .5)
+        }
+
+        .toc a {
+            color: #4338ca;
+            text-decoration: none
+        }
+
+        .toc a:hover {
+            text-decoration: underline
+        }
+
+        .toc li {
+            margin-bottom: 6px
+        }
+
+        .section {
+            margin-bottom: 24px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- COVER PAGE -->
+        <div class="cover">
+            <h1>KTU MCQ Platform</h1>
+            <div class="subtitle">Comprehensive Technical Documentation</div>
+            <p style="color:#64748b;font-size:11pt;max-width:500px;margin:0 auto 30px">
+                An adaptive MCQ assessment platform built for KTU (APJ Abdul Kalam Technological University) S6 CST
+                students with real-time analytics, role-based access, and automated difficulty indexing.
+            </p>
+            <div>
+                <span class="badge">Full-Stack Web Application</span>
+                <span class="badge">MERN Stack</span>
+                <span class="badge">REST API</span>
+                <span class="badge">Role-Based Access</span>
+            </div>
+            <div class="meta">
+                <strong>Date:</strong> March 2026<br>
+                <strong>Architecture:</strong> Client-Server (Monorepo)<br>
+                <strong>Version:</strong> 1.0.0
+            </div>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <h2>Table of Contents</h2>
+        <ol class="toc">
+            <li><a href="#overview">Project Overview &amp; Objectives</a></li>
+            <li><a href="#architecture">System Architecture</a></li>
+            <li><a href="#techstack">Technology Stack</a></li>
+            <li><a href="#frontend">Frontend Modules</a></li>
+            <li><a href="#backend">Backend Modules</a></li>
+            <li><a href="#database">Database Design</a></li>
+            <li><a href="#api">API Endpoints</a></li>
+            <li><a href="#auth">Authentication &amp; Security</a></li>
+            <li><a href="#analytics">Analytics Engine</a></li>
+            <li><a href="#workflow">Development Workflow</a></li>
+            <li><a href="#tools">Software &amp; Tools Used</a></li>
+            <li><a href="#deployment">Deployment &amp; Configuration</a></li>
+        </ol>
+
+        <div class="page-break"></div>
+
+        <!-- 1. OVERVIEW -->
+        <h2 id="overview">1. Project Overview &amp; Objectives</h2>
+        <div class="section">
+            <p>The <strong>KTU MCQ Platform</strong> is a full-stack web application designed to help students prepare
+                for university exams by taking timed MCQ assessments aligned with KTU S6 Computer Science &amp;
+                Technology (CST) syllabus.</p>
+            <h3>Core Objectives</h3>
+            <ul>
+                <li><strong>Adaptive Assessment:</strong> Timed MCQ tests with server-enforced timers and
+                    auto-submission</li>
+                <li><strong>Multi-Role Access:</strong> Student, Faculty, and Admin dashboards with distinct workflows
+                </li>
+                <li><strong>Real-Time Analytics:</strong> Post-exam mistake classification, accuracy tracking, and exam
+                    readiness scoring</li>
+                <li><strong>Automated Difficulty Indexing:</strong> Question difficulty auto-adjusts based on student
+                    performance data</li>
+                <li><strong>Bulk Question Import:</strong> Faculty can bulk-import questions via CSV files</li>
+                <li><strong>Anti-Cheating:</strong> Tab-switch detection, server-side timer validation, and answer
+                    locking</li>
+                <li><strong>Leaderboard:</strong> Global student ranking by accuracy and tests completed</li>
+            </ul>
+
+            <h3>Target Users</h3>
+            <table>
+                <tr>
+                    <th>Role</th>
+                    <th>Capabilities</th>
+                </tr>
+                <tr>
+                    <td><strong>Student</strong></td>
+                    <td>Take tests, view scores, track syllabus mastery, view leaderboard, upload profile picture</td>
+                </tr>
+                <tr>
+                    <td><strong>Faculty</strong></td>
+                    <td>View class performance, create/edit/delete questions, bulk CSV import, download marks CSV</td>
+                </tr>
+                <tr>
+                    <td><strong>Admin</strong></td>
+                    <td>Create &amp; manage tests, full question bank CRUD, platform administration</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 2. ARCHITECTURE -->
+        <h2 id="architecture">2. System Architecture</h2>
+        <div class="section">
+            <p>The platform follows a <strong>client-server monorepo</strong> architecture with a React SPA frontend
+                communicating with a Node.js/Express REST API backend, backed by MongoDB.</p>
+            <div class="arch-box">
+                <div class="layer"><strong>🖥️ Frontend (React SPA)</strong><br>React 19 + Vite 7 + Tailwind CSS
+                    v4<br>Port: 5173</div>
+                <div class="arrow">⬇ HTTP / REST API (Proxied via Vite) ⬇</div>
+                <div class="layer"><strong>⚙️ Backend (Express API)</strong><br>Node.js + Express 5 + JWT Auth<br>Port:
+                    5000</div>
+                <div class="arrow">⬇ Mongoose ODM ⬇</div>
+                <div class="layer"><strong>🗄️ Database (MongoDB)</strong><br>MongoDB 7+ / In-Memory (dev)<br>4
+                    Collections</div>
+            </div>
+
+            <h3>Directory Structure</h3>
+            <div class="code-block">mcqWebApp-master/
+                ├── backend/
+                │ ├── index.js # Express server entry point
+                │ ├── controllers/ # Route handlers (5 files)
+                │ ├── models/ # Mongoose schemas (4 files)
+                │ ├── routes/ # Express routers (5 files)
+                │ ├── middleware/ # JWT auth middleware
+                │ ├── services/ # Analytics engine
+                │ ├── seed.js # Database seeder
+                │ ├── seeds/ # Seed data files
+                │ └── uploads/ # CSV upload directory
+                ├── frontend/
+                │ ├── src/
+                │ │ ├── App.jsx # Root component + routing
+                │ │ ├── main.jsx # React DOM entry point
+                │ │ ├── index.css # Global CSS + animation system
+                │ │ ├── components/ # UI components (8 files)
+                │ │ ├── context/ # Auth context provider
+                │ │ └── hooks/ # Custom React hooks
+                │ ├── vite.config.js # Vite + proxy config
+                │ └── public/ # Static assets
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 3. TECH STACK -->
+        <h2 id="techstack">3. Technology Stack</h2>
+        <div class="section">
+
+            <h3>3.1 Programming Languages</h3>
+            <table>
+                <tr>
+                    <th>Language</th>
+                    <th>Usage</th>
+                    <th>Version</th>
+                </tr>
+                <tr>
+                    <td><strong>JavaScript (ES6+)</strong></td>
+                    <td>Primary language — both frontend &amp; backend</td>
+                    <td>ES2022+</td>
+                </tr>
+                <tr>
+                    <td><strong>JSX</strong></td>
+                    <td>React component templating (HTML-in-JS)</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td><strong>CSS3</strong></td>
+                    <td>Styling, animations, keyframes, glassmorphism</td>
+                    <td>CSS3</td>
+                </tr>
+                <tr>
+                    <td><strong>HTML5</strong></td>
+                    <td>Semantic markup structure</td>
+                    <td>HTML5</td>
+                </tr>
+            </table>
+
+            <h3>3.2 Frontend Technologies</h3>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                    <th>Version</th>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">React</span></td>
+                    <td>UI library — component-based SPA architecture</td>
+                    <td>19.2.0</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">React DOM</span></td>
+                    <td>DOM rendering for React components</td>
+                    <td>19.2.0</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">React Router DOM</span></td>
+                    <td>Client-side routing &amp; navigation</td>
+                    <td>7.13.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">Axios</span></td>
+                    <td>HTTP client for API communication</td>
+                    <td>1.13.5</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">Tailwind CSS</span></td>
+                    <td>Utility-first CSS framework</td>
+                    <td>4.2.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">Vite</span></td>
+                    <td>Build tool &amp; dev server with HMR</td>
+                    <td>7.3.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">@vitejs/plugin-react</span></td>
+                    <td>React plugin for Vite (JSX/Fast Refresh)</td>
+                    <td>5.1.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">@tailwindcss/vite</span></td>
+                    <td>Tailwind CSS v4 Vite integration</td>
+                    <td>4.2.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">PostCSS</span></td>
+                    <td>CSS processing pipeline</td>
+                    <td>8.5.6</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">Autoprefixer</span></td>
+                    <td>CSS vendor prefix automation</td>
+                    <td>10.4.27</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge">ESLint</span></td>
+                    <td>JavaScript code linting</td>
+                    <td>9.39.1</td>
+                </tr>
+            </table>
+
+            <h3>3.3 Backend Technologies</h3>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                    <th>Version</th>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">Node.js</span></td>
+                    <td>JavaScript runtime environment</td>
+                    <td>18+</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">Express</span></td>
+                    <td>Web framework for REST API</td>
+                    <td>5.2.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">Mongoose</span></td>
+                    <td>MongoDB ODM (Object Document Mapper)</td>
+                    <td>9.2.3</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">jsonwebtoken (JWT)</span></td>
+                    <td>Token-based authentication</td>
+                    <td>9.0.3</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">bcryptjs</span></td>
+                    <td>Password hashing (bcrypt algorithm)</td>
+                    <td>3.0.3</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">cors</span></td>
+                    <td>Cross-Origin Resource Sharing middleware</td>
+                    <td>2.8.6</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">dotenv</span></td>
+                    <td>Environment variable management</td>
+                    <td>17.3.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">multer</span></td>
+                    <td>File upload handling (CSV import)</td>
+                    <td>2.1.1</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">csv-parser</span></td>
+                    <td>CSV file parsing for bulk import</td>
+                    <td>3.2.0</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge green">mongodb-memory-server</span></td>
+                    <td>In-memory MongoDB for dev/testing</td>
+                    <td>11.0.1</td>
+                </tr>
+            </table>
+
+            <h3>3.4 Database</h3>
+            <table>
+                <tr>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge orange">MongoDB</span></td>
+                    <td>Primary database — document-oriented NoSQL</td>
+                    <td>Production</td>
+                </tr>
+                <tr>
+                    <td><span class="tech-badge orange">MongoDB Memory Server</span></td>
+                    <td>In-memory MongoDB instance for development</td>
+                    <td>Development</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 4. FRONTEND MODULES -->
+        <h2 id="frontend">4. Frontend Modules</h2>
+        <div class="section">
+
+            <h3>4.1 Components</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>File</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Login</strong></td>
+                    <td><code>Login.jsx</code></td>
+                    <td>Email/password authentication with animated glassmorphism UI, 3D buttons, floating particles
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Register</strong></td>
+                    <td><code>Register.jsx</code></td>
+                    <td>Student registration (name, email, password, confirm password) with form validation</td>
+                </tr>
+                <tr>
+                    <td><strong>FacultyRegister</strong></td>
+                    <td><code>FacultyRegister.jsx</code></td>
+                    <td>Faculty registration with Faculty ID field for role-based account creation</td>
+                </tr>
+                <tr>
+                    <td><strong>StudentDashboard</strong></td>
+                    <td><code>StudentDashboard.jsx</code></td>
+                    <td>Student hub — syllabus mastery matrix (6 KTU subjects), available tests, recent activity, global
+                        leaderboard, profile picture upload</td>
+                </tr>
+                <tr>
+                    <td><strong>FacultyDashboard</strong></td>
+                    <td><code>FacultyDashboard.jsx</code></td>
+                    <td>Faculty control center — class performance table, question bank CRUD, bulk CSV import, marks CSV
+                        download</td>
+                </tr>
+                <tr>
+                    <td><strong>AdminDashboard</strong></td>
+                    <td><code>AdminDashboard.jsx</code></td>
+                    <td>Admin panel — test creation/management, question bank CRUD with difficulty &amp; subject tagging
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>TestEngine</strong></td>
+                    <td><code>TestEngine.jsx</code></td>
+                    <td>Core assessment engine — server-synced timer, question navigation map, answer persistence,
+                        auto-submit, detailed results with explanations</td>
+                </tr>
+                <tr>
+                    <td><strong>MobileNav</strong></td>
+                    <td><code>MobileNav.jsx</code></td>
+                    <td>Responsive bottom navigation bar with role-based links and animated active states</td>
+                </tr>
+                <tr>
+                    <td><strong>ProtectedRoute</strong></td>
+                    <td><code>ProtectedRoute.jsx</code></td>
+                    <td>Route guard — redirects unauthenticated users, enforces role-based access</td>
+                </tr>
+            </table>
+
+            <h3>4.2 Context &amp; Hooks</h3>
+            <table>
+                <tr>
+                    <th>Module</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td><code>AuthContext.jsx</code></td>
+                    <td>Global authentication state (user, token, login, register, registerFaculty, logout). Uses React
+                        Context API + localStorage persistence.</td>
+                </tr>
+                <tr>
+                    <td><code>useServerTimer.js</code></td>
+                    <td>Custom hook for server-synced countdown timer. Calculates remaining time from server start_time
+                        + duration. Returns formatted time &amp; expiry state.</td>
+                </tr>
+            </table>
+
+            <h3>4.3 Routing Structure</h3>
+            <table>
+                <tr>
+                    <th>Route</th>
+                    <th>Component</th>
+                    <th>Access</th>
+                </tr>
+                <tr>
+                    <td><code>/login</code></td>
+                    <td>Login</td>
+                    <td>Public</td>
+                </tr>
+                <tr>
+                    <td><code>/register</code></td>
+                    <td>Register</td>
+                    <td>Public</td>
+                </tr>
+                <tr>
+                    <td><code>/faculty-register</code></td>
+                    <td>FacultyRegister</td>
+                    <td>Public</td>
+                </tr>
+                <tr>
+                    <td><code>/dashboard</code></td>
+                    <td>StudentDashboard</td>
+                    <td>Authenticated (Student)</td>
+                </tr>
+                <tr>
+                    <td><code>/test/:testId</code></td>
+                    <td>TestEngine</td>
+                    <td>Authenticated (Student)</td>
+                </tr>
+                <tr>
+                    <td><code>/admin</code></td>
+                    <td>AdminDashboard</td>
+                    <td>Admin only</td>
+                </tr>
+                <tr>
+                    <td><code>/faculty-dashboard</code></td>
+                    <td>FacultyDashboard</td>
+                    <td>Faculty only</td>
+                </tr>
+            </table>
+
+            <h3>4.4 UI Design System</h3>
+            <p>The frontend uses a custom CSS animation system built on top of Tailwind CSS v4:</p>
+            <ul>
+                <li><strong>Glassmorphism:</strong> Frosted blur cards (<code>.glass-card</code>) with backdrop-filter
+                </li>
+                <li><strong>3D Buttons:</strong> Depth shadows with hover lift &amp; active press (<code>.btn-3d</code>)
+                </li>
+                <li><strong>Animated Gradient Borders:</strong> Color-shifting borders via CSS <code>::before</code>
+                </li>
+                <li><strong>Floating Orbs &amp; Particles:</strong> Ambient background animations via keyframes</li>
+                <li><strong>Staggered Entrances:</strong> Cascading page-load animations with delay classes</li>
+                <li><strong>Mesh Gradients:</strong> Multi-point radial gradients for depth effect</li>
+                <li><strong>Noise Texture Overlay:</strong> Subtle SVG-based film grain effect</li>
+                <li><strong>Custom Scrollbars:</strong> Styled WebKit scrollbars matching theme</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 5. BACKEND MODULES -->
+        <h2 id="backend">5. Backend Modules</h2>
+        <div class="section">
+
+            <h3>5.1 Controllers</h3>
+            <table>
+                <tr>
+                    <th>Controller</th>
+                    <th>File</th>
+                    <th>Responsibilities</th>
+                </tr>
+                <tr>
+                    <td><strong>Auth</strong></td>
+                    <td><code>authController.js</code></td>
+                    <td>User registration (Student/Faculty/Admin), login with JWT token generation, password hashing
+                        with bcrypt</td>
+                </tr>
+                <tr>
+                    <td><strong>Test</strong></td>
+                    <td><code>testController.js</code></td>
+                    <td>Test CRUD, test attempt initiation, question fetching per attempt, answer syncing, test
+                        finishing with analytics trigger</td>
+                </tr>
+                <tr>
+                    <td><strong>Question</strong></td>
+                    <td><code>questionController.js</code></td>
+                    <td>Question CRUD, bulk CSV import via multer + csv-parser, question listing with filters</td>
+                </tr>
+                <tr>
+                    <td><strong>Student</strong></td>
+                    <td><code>studentController.js</code></td>
+                    <td>Student dashboard data aggregation, leaderboard generation, profile updates (profile picture)
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Faculty</strong></td>
+                    <td><code>facultyController.js</code></td>
+                    <td>Class performance data — all student marks/accuracy across tests</td>
+                </tr>
+            </table>
+
+            <h3>5.2 Models (Mongoose Schemas)</h3>
+            <table>
+                <tr>
+                    <th>Model</th>
+                    <th>Collection</th>
+                    <th>Key Fields</th>
+                </tr>
+                <tr>
+                    <td><strong>User</strong></td>
+                    <td><code>users</code></td>
+                    <td>name, email, password_hash, role (Student/Faculty/Admin), facultyId, profile_picture,
+                        overall_accuracy, tests_taken, readiness_status</td>
+                </tr>
+                <tr>
+                    <td><strong>Question</strong></td>
+                    <td><code>questions</code></td>
+                    <td>question_text, options[], correct_option, explanation, subject, concept_tag, difficulty
+                        (auto-indexed), historical_accuracy, times_attempted</td>
+                </tr>
+                <tr>
+                    <td><strong>Test</strong></td>
+                    <td><code>tests</code></td>
+                    <td>title, description, total_duration_minutes, subject, is_adaptive, is_active</td>
+                </tr>
+                <tr>
+                    <td><strong>TestAttempt</strong></td>
+                    <td><code>testattempts</code></td>
+                    <td>user_id, test_id, start_time, end_time, status, questions[], answers[] (subdoc), score,
+                        accuracy_percentage, tab_switches</td>
+                </tr>
+            </table>
+
+            <h3>5.3 Middleware</h3>
+            <table>
+                <tr>
+                    <th>Middleware</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td><code>protect</code></td>
+                    <td>JWT token verification — extracts user from Bearer token, attaches to <code>req.user</code></td>
+                </tr>
+                <tr>
+                    <td><code>adminRequired</code></td>
+                    <td>Restricts access to Admin role only</td>
+                </tr>
+                <tr>
+                    <td><code>adminOrFacultyRequired</code></td>
+                    <td>Restricts access to Admin or Faculty roles</td>
+                </tr>
+            </table>
+
+            <h3>5.4 Services</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td><code>analyticsEngine.js</code></td>
+                    <td>Post-exam analytics — mistake classification (Conceptual/Calculation/Guessing/Time Pressure),
+                        question difficulty auto-indexing, user readiness scoring, rolling accuracy updates</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 6. DATABASE -->
+        <h2 id="database">6. Database Design</h2>
+        <div class="section">
+            <p><strong>Database:</strong> MongoDB (NoSQL Document Store)<br>
+                <strong>ODM:</strong> Mongoose v9.2.3<br>
+                <strong>Dev Mode:</strong> mongodb-memory-server (auto-seeded in-memory instance)
+            </p>
+
+            <h3>Entity Relationship</h3>
+            <div class="arch-box">
+                <div class="layer"><strong>User</strong> (1) ——→ (N) <strong>TestAttempt</strong></div>
+                <div class="layer"><strong>Test</strong> (1) ——→ (N) <strong>TestAttempt</strong></div>
+                <div class="layer"><strong>Question</strong> (N) ←——→ (N) <strong>TestAttempt.questions[]</strong></div>
+                <div class="layer"><strong>TestAttempt.answers[]</strong> → embedded subdocument (AnswerLog)</div>
+            </div>
+
+            <h3>AnswerLog Subdocument Schema</h3>
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>question_id</td>
+                    <td>ObjectId (ref: Question)</td>
+                    <td>Reference to the question</td>
+                </tr>
+                <tr>
+                    <td>concept_tag</td>
+                    <td>String</td>
+                    <td>Snapshotted concept tag for fast analytics</td>
+                </tr>
+                <tr>
+                    <td>difficulty</td>
+                    <td>String</td>
+                    <td>Snapshotted difficulty at time of attempt</td>
+                </tr>
+                <tr>
+                    <td>selected_option_id</td>
+                    <td>String</td>
+                    <td>Student's chosen option (null = skipped)</td>
+                </tr>
+                <tr>
+                    <td>is_correct</td>
+                    <td>Boolean</td>
+                    <td>Correctness flag</td>
+                </tr>
+                <tr>
+                    <td>time_spent_seconds</td>
+                    <td>Number</td>
+                    <td>Time spent on this question</td>
+                </tr>
+                <tr>
+                    <td>mistake_type</td>
+                    <td>Enum</td>
+                    <td>Conceptual / Calculation / Guessing / Time Pressure / None</td>
+                </tr>
+                <tr>
+                    <td>is_locked</td>
+                    <td>Boolean</td>
+                    <td>Immutability flag — once recorded, never changes</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 7. API ENDPOINTS -->
+        <h2 id="api">7. API Endpoints</h2>
+        <div class="section">
+            <table>
+                <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Auth</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/auth/register</code></td>
+                    <td>Public</td>
+                    <td>Register user (Student/Faculty)</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/auth/login</code></td>
+                    <td>Public</td>
+                    <td>Login &amp; receive JWT token</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><code>/api/tests</code></td>
+                    <td>Auth</td>
+                    <td>List all tests</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/tests</code></td>
+                    <td>Admin</td>
+                    <td>Create new test</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/tests/:id/start</code></td>
+                    <td>Auth</td>
+                    <td>Start a test attempt</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><code>/api/tests/attempt/:id/questions</code></td>
+                    <td>Auth</td>
+                    <td>Get questions for attempt</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/tests/attempt/:id/sync</code></td>
+                    <td>Auth</td>
+                    <td>Sync answers during test</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/tests/attempt/:id/finish</code></td>
+                    <td>Auth</td>
+                    <td>Finish test &amp; trigger analytics</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><code>/api/questions</code></td>
+                    <td>Admin/Faculty</td>
+                    <td>List all questions</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/questions</code></td>
+                    <td>Admin/Faculty</td>
+                    <td>Create single question</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td><code>/api/questions/:id</code></td>
+                    <td>Admin/Faculty</td>
+                    <td>Update question</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td><code>/api/questions/:id</code></td>
+                    <td>Admin/Faculty</td>
+                    <td>Delete question</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td><code>/api/questions/bulk</code></td>
+                    <td>Admin/Faculty</td>
+                    <td>Bulk CSV import</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><code>/api/student/dashboard</code></td>
+                    <td>Student</td>
+                    <td>Dashboard data aggregation</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><code>/api/student/leaderboard</code></td>
+                    <td>Student</td>
+                    <td>Global leaderboard</td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td><code>/api/student/profile</code></td>
+                    <td>Student</td>
+                    <td>Update profile picture</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td><code>/api/faculty/students/marks</code></td>
+                    <td>Faculty</td>
+                    <td>All student marks &amp; accuracy</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 8. AUTH -->
+        <h2 id="auth">8. Authentication &amp; Security</h2>
+        <div class="section">
+            <ul>
+                <li><strong>Authentication Method:</strong> JWT (JSON Web Token) — Bearer token in Authorization header
+                </li>
+                <li><strong>Password Hashing:</strong> bcryptjs with salt rounds for secure password storage</li>
+                <li><strong>Token Payload:</strong> <code>{ id, role }</code> — used for route-level authorization</li>
+                <li><strong>Frontend Persistence:</strong> Token &amp; user object stored in <code>localStorage</code>
+                </li>
+                <li><strong>Route Protection:</strong> <code>ProtectedRoute</code> component checks token presence &amp;
+                    role match</li>
+                <li><strong>Anti-Cheating:</strong> Tab-switch detection via <code>visibilitychange</code> event with
+                    alerts</li>
+                <li><strong>Timer Integrity:</strong> Server-issued <code>start_time</code> and <code>duration</code> —
+                    client cannot manipulate exam duration</li>
+                <li><strong>Answer Immutability:</strong> <code>is_locked</code> flag on answer logs prevents
+                    post-submission tampering</li>
+            </ul>
+        </div>
+
+        <!-- 9. ANALYTICS -->
+        <h2 id="analytics">9. Analytics Engine</h2>
+        <div class="section">
+            <p>The <code>analyticsEngine.js</code> service runs automatically upon exam completion and performs:</p>
+            <h4>Mistake Classification Matrix</h4>
+            <table>
+                <tr>
+                    <th>Mistake Type</th>
+                    <th>Detection Rule</th>
+                </tr>
+                <tr>
+                    <td>Guessing</td>
+                    <td>Incorrect answer + time spent &lt; 10 seconds</td>
+                </tr>
+                <tr>
+                    <td>Time Pressure</td>
+                    <td>No option selected (null/skipped)</td>
+                </tr>
+                <tr>
+                    <td>Conceptual</td>
+                    <td>Incorrect answer + time spent &gt; 60 seconds</td>
+                </tr>
+                <tr>
+                    <td>Calculation</td>
+                    <td>Incorrect answer + 10-60 seconds (default)</td>
+                </tr>
+            </table>
+            <h4>Automated Difficulty Indexing</h4>
+            <p>After ≥5 attempts on a question, difficulty auto-adjusts:</p>
+            <ul>
+                <li>Historical accuracy ≥ 70% → <strong>Easy</strong></li>
+                <li>Historical accuracy ≤ 40% → <strong>Hard</strong></li>
+                <li>Otherwise → <strong>Medium</strong></li>
+            </ul>
+            <h4>Readiness Status Classification</h4>
+            <ul>
+                <li><strong>Exam-Ready:</strong> Overall accuracy ≥ 75% AND zero conceptual errors</li>
+                <li><strong>Borderline:</strong> Overall accuracy ≥ 50% AND guessing errors &lt; 3</li>
+                <li><strong>Not Exam-Ready:</strong> All other cases</li>
+            </ul>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- 10. WORKFLOW -->
+        <h2 id="workflow">10. Development Workflow</h2>
+        <div class="section">
+            <h3>10.1 Starting the Application</h3>
+            <div class="code-block"># Terminal 1 — Start Backend
+                cd backend
+                npm run dev # Runs on port 5000
+
+                # Terminal 2 — Start Frontend
+                cd frontend
+                npm run dev # Runs on port 5173 (proxies /api → :5000)</div>
+
+            <h3>10.2 Build for Production</h3>
+            <div class="code-block">cd frontend
+                npm run build # Outputs to frontend/dist/</div>
+
+            <h3>10.3 Database Seeding</h3>
+            <p>If no <code>MONGO_URI</code> is provided in <code>.env</code>, the app auto-starts an in-memory MongoDB
+                and seeds it with test data via <code>seed.js</code>.</p>
+
+            <h3>10.4 CSV Bulk Import Format</h3>
+            <table>
+                <tr>
+                    <th>Column</th>
+                    <th>Required</th>
+                    <th>Values</th>
+                </tr>
+                <tr>
+                    <td>Question Text</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Option A</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Option B</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Option C</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Option D</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Correct Option</td>
+                    <td>Yes</td>
+                    <td>A / B / C / D</td>
+                </tr>
+                <tr>
+                    <td>Subject</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Concept Tag</td>
+                    <td>Yes</td>
+                    <td>Free text</td>
+                </tr>
+                <tr>
+                    <td>Difficulty</td>
+                    <td>No</td>
+                    <td>Easy / Medium / Hard</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 11. TOOLS -->
+        <h2 id="tools">11. Software &amp; Tools Used</h2>
+        <div class="section">
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Tool</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Runtime</td>
+                    <td>Node.js 18+</td>
+                    <td>JavaScript runtime for backend</td>
+                </tr>
+                <tr>
+                    <td>Package Manager</td>
+                    <td>npm</td>
+                    <td>Dependency management</td>
+                </tr>
+                <tr>
+                    <td>Build Tool</td>
+                    <td>Vite 7.3</td>
+                    <td>Frontend bundler &amp; dev server with HMR</td>
+                </tr>
+                <tr>
+                    <td>IDE</td>
+                    <td>VS Code</td>
+                    <td>Code editor with extensions</td>
+                </tr>
+                <tr>
+                    <td>Version Control</td>
+                    <td>Git</td>
+                    <td>Source code versioning</td>
+                </tr>
+                <tr>
+                    <td>API Testing</td>
+                    <td>Browser DevTools / Axios</td>
+                    <td>HTTP request debugging</td>
+                </tr>
+                <tr>
+                    <td>Database GUI</td>
+                    <td>MongoDB Compass (optional)</td>
+                    <td>Database visualization</td>
+                </tr>
+                <tr>
+                    <td>Linting</td>
+                    <td>ESLint 9</td>
+                    <td>Code quality enforcement</td>
+                </tr>
+                <tr>
+                    <td>CSS Framework</td>
+                    <td>Tailwind CSS v4</td>
+                    <td>Utility-first styling</td>
+                </tr>
+                <tr>
+                    <td>Operating System</td>
+                    <td>Windows 10/11</td>
+                    <td>Development environment</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 12. DEPLOYMENT -->
+        <h2 id="deployment">12. Deployment &amp; Configuration</h2>
+        <div class="section">
+            <h3>Environment Variables (<code>backend/.env</code>)</h3>
+            <table>
+                <tr>
+                    <th>Variable</th>
+                    <th>Purpose</th>
+                    <th>Required</th>
+                </tr>
+                <tr>
+                    <td><code>PORT</code></td>
+                    <td>Backend server port (default: 5000)</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td><code>MONGO_URI</code></td>
+                    <td>MongoDB connection string</td>
+                    <td>No (falls back to in-memory)</td>
+                </tr>
+                <tr>
+                    <td><code>JWT_SECRET</code></td>
+                    <td>Secret key for JWT signing</td>
+                    <td>Yes</td>
+                </tr>
+            </table>
+
+            <h3>Vite Proxy Configuration</h3>
+            <p>The frontend dev server proxies all <code>/api</code> requests to <code>http://localhost:5000</code> via
+                Vite's built-in proxy, eliminating CORS issues during development.</p>
+
+            <h3>Deployment Options</h3>
+            <ul>
+                <li><strong>Frontend:</strong> Vercel, Netlify, or any static hosting (serve <code>dist/</code> folder)
+                </li>
+                <li><strong>Backend:</strong> Render, Railway, Heroku, or any Node.js hosting</li>
+                <li><strong>Database:</strong> MongoDB Atlas (cloud) for production</li>
+            </ul>
+        </div>
+
+        <div
+            style="text-align:center;margin-top:60px;padding:30px;border-top:2px solid #e2e8f0;color:#94a3b8;font-size:9pt">
+            <p><strong>KTU MCQ Platform — Technical Documentation</strong></p>
+            <p>Generated March 2026 • Full-Stack MERN Application</p>
+        </div>
+
+    </div>
+
+    <!-- Print Button -->
+    <button class="print-btn no-print" onclick="window.print()">📄 Download as PDF</button>
+
+</body>
+
+</html>
