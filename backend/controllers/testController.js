@@ -39,7 +39,7 @@ const startTest = async (req, res) => {
             }
             const matchedQuestions = await Question.find(matchQuery).select('_id');
             // Shuffle
-            const shuffledIds = matchedQuestions.map(q => q._id).sort(() => 0.5 - Math.random());
+            const shuffledIds = matchedQuestions.map(q => q._id).sort(() => 0.5 - Math.random()).slice(0, 50);
 
             attempt = await TestAttempt.create({
                 user_id: userId,
